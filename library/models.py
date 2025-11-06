@@ -4,15 +4,16 @@ from django.db import models
 
 
 class Author(models.Model):
-    first_name = models.CharField(max_length=20, verbose_name="Имя автора", help_text="Author's name")
-    last_name = models.CharField(max_length=50, verbose_name="Фамилия автора", help_text="Author's lastname")
-    birthday = models.DateField(verbose_name="Дата рождения автора", help_text="Author's birthday")
-    profile =  models.URLField(blank=True, null=True, verbose_name="Профиль автора", help_text="Author's linkprofile")
-    deleted = models.BooleanField(default=False, verbose_name="Удален ли автор", help_text="deleted or not author's profile")
-    rating = models.FloatField(verbose_name="Рейтинг автора", help_text="Author's raiting",
+    first_name = models.CharField(max_length=20, help_text="First name of the author", verbose_name="Имя автора")
+    last_name = models.CharField(max_length=50, help_text="Last name of the author", verbose_name="Фамилия автора")
+    birthday = models.DateField(verbose_name="Дата рождения")
+    profile =  models.URLField(blank=True, null=True, verbose_name="Ссылка на соцсеть")
+    deleted = models.BooleanField(default=False, help_text="Если галочка включена автор удален", verbose_name="Профиль удален")
+    rating = models.FloatField(
         validators=[MinValueValidator(0),
                     MaxValueValidator(10)],
-        default=0
+        default=0,
+        verbose_name="рейтинг автора"
     )
 
     def __str__(self):
